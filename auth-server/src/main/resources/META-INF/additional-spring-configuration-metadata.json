@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "wecom.agent-id",
+      "type": "java.lang.String",
+      "description": "Description for wecom.agent-id."
+  }
+] }

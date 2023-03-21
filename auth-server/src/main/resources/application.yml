@@ -1,0 +1,64 @@
+server:
+  port: 9000
+
+spring:
+  #  datasource:
+  #    hikari:
+  #      minimum-idle: 5
+  #      maximum-pool-size: 15
+  #      auto-commit: true
+  #      idle-timeout: 30000
+  #      pool-name: HikariCP
+  #      #30 min
+  #      max-lifetime: 1800000
+  #      connection-timeout: 30000
+  #    type: com.zaxxer.hikari.HikariDataSource
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #    url: jdbc:mysql://127.0.0.1:33306/auth_server?useUnicode=true&allowMultiQueries=true&rewriteBatchedStatements=true&useSSL=false&serverTimezone=GMT%2B8&useLegacyDatetimeCode=false&characterEncoding=utf-8
+  #    username: root
+  #    password: 123456
+  security:
+    oauth2:
+      client:
+        registration:
+          google-idp:
+            provider: google
+            client-id: ${GOOGLE_CLIENT_ID:google-client-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:google-client-secret}
+            scope: openid, https://www.googleapis.com/auth/userinfo.profile, https://www.googleapis.com/auth/userinfo.email
+            client-name: Sign in with Google
+          github-idp:
+            provider: github
+            client-id: cb3f5b975fa535084605
+            client-secret: 1f498143eeb8d5051086d9e2a53500757f11b0a3
+            scope: user:email, read:user
+            client-name: Sign in with GitHub
+          wecom-idp:
+            provider: wecom
+            authorization-grant-type: authorization_code
+            client-id: ww2ba45db4608e1eaa
+            client-secret: vR1_4o40NnT9rfUC5z7NL4-yBz1FUyOktjDlo93z9DE
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            scope: getuserinfo
+            client-name: Sign in with WeCom
+        provider:
+          google:
+            user-name-attribute: email
+          github:
+            user-name-attribute: login
+          wecom:
+            authorization-uri: https://open.work.weixin.qq.com/wwopen/sso/qrConnect
+            token-uri: https://qyapi.weixin.qq.com/cgi-bin/gettoken
+            user-info-uri: https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo
+            user-name-attribute: userid
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: trace
+#    org.springframework.boot.autoconfigure: debug
+
+wecom:
+  agent-id: 1000015
